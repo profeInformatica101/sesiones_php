@@ -1,8 +1,12 @@
 <?php
 session_start();
 
-// Verificar si el jugador ha adivinado correctamente o ha superado el límite de intentos
-if (isset($_SESSION['ganador']) && $_SESSION['ganador'] || $_SESSION['intentos'] >= 5) {
+if (!isset($_COOKIE['nombre_jugador'])) {
+    header('Location: nombre_jugador.php');
+    exit;
+}
+
+if ($_SESSION['ganador'] || $_SESSION['intentos'] >= 5) {
     header('Location: resultado.php');
     exit;
 }
@@ -12,12 +16,13 @@ if (isset($_POST['numero'])) {
 
     if ($_POST['numero'] == $_SESSION['numero_aleatorio']) {
         $_SESSION['ganador'] = true;
+        $_SESSION['ganadores'][$_COOKIE['nombre_jugador']] = $_SESSION['intentos'];
         header('Location: resultado.php');
         exit;
     }
 }
 
-$nombre_jugador = isset($_COOKIE['nombre_jugador']) ? $_COOKIE['nombre_jugador'] : "Jugador";
+$nombre_jugador = $_COOKIE['nombre_jugador'];
 ?>
 
 <!DOCTYPE html>
@@ -36,3 +41,4 @@ $nombre_jugador = isset($_COOKIE['nombre_jugador']) ? $_COOKIE['nombre_jugador']
     </form>
 </body>
 </html>
+
