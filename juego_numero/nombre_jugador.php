@@ -1,4 +1,6 @@
 <?php
+$nombre_jugador = isset($_COOKIE['nombre_jugador']) ? $_COOKIE['nombre_jugador'] : '';
+
 if (isset($_POST['nombre'])) {
     $nombre_jugador = $_POST['nombre'];
     setcookie('nombre_jugador', $nombre_jugador, time() + 86400 * 30); // La cookie expira en 30 días
@@ -14,10 +16,10 @@ if (isset($_POST['nombre'])) {
     <title>Nombre del jugador</title>
 </head>
 <body>
-    <h1>Ingresa tu nombre</h1>
+    <h1><?= empty($nombre_jugador) ? 'Ingresa' : 'Edita' ?> tu nombre</h1>
     <form action="nombre_jugador.php" method="post">
-        <input type="text" name="nombre" required>
-        <button type="submit">Guardar</button>
+        <input type="text" name="nombre" value="<?= $nombre_jugador ?>" required>
+        <button type="submit"><?= empty($nombre_jugador) ? 'Guardar' : 'Actualizar' ?></button>
     </form>
 </body>
 </html>
