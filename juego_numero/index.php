@@ -1,8 +1,13 @@
 <?php
-if (!isset($_COOKIE['nombre_jugador'])) {
-    header('Location: nombre_jugador.php');
-    exit;
+session_start();
+
+if (!isset($_SESSION['ganadores'])) {
+    $_SESSION['ganadores'] = [];
 }
 
-header('Location: adivinanza.php');
+$_SESSION['numero_aleatorio'] = rand(1, 10);
+$_SESSION['intentos'] = 0;
+$_SESSION['ganador'] = false;
+
+header('Location: nombre_jugador.php');
 exit;
