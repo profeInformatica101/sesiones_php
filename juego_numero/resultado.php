@@ -28,6 +28,6 @@ $nombre_jugador = $_COOKIE['nombre_jugador'];
         <?php endforeach; ?>
     </ul>
     
-    <a href="inicio.php">Jugar de nuevo</a>
+    <a href="index.php">Jugar de nuevo</a>
 </body>
 </html>
