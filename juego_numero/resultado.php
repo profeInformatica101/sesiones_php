@@ -8,6 +8,13 @@ if (!isset($_SESSION['ganador']) && $_SESSION['intentos'] < 5) {
 
 $mensaje = $_SESSION['ganador'] ? '¡Felicidades! ¡Adivinaste el número!' : 'Lo siento, no adivinaste el número.';
 
+if ($_SESSION['ganador']) {
+    $nombre_jugador = $_COOKIE['nombre_jugador'];
+    $ganadores = isset($_SESSION['ganadores']) ? $_SESSION['ganadores'] : [];
+    $ganadores[] = ['nombre' => $nombre_jugador, 'intentos' => $_SESSION['intentos']];
+    $_SESSION['ganadores'] = $ganadores;
+}
+
 session_destroy();
 ?>
 
@@ -19,6 +26,6 @@ session_destroy();
 </head>
 <body>
     <h1><?= $mensaje ?></h1>
-    <p>Tu puntaje actual: <?= $_COOKIE['puntaje'] ?></p>
-    <a href="index.php">Jugar de nuevo</a>
+    <a href="index.php">Jugar de nuevo</a> | <a href="nombre_jugador.php">Editar nombre</a>
 </body>
+</html>
