@@ -1,7 +1,12 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['autenticado']) || !$_SESSION['autenticado']) {
+$tiempo_actual = time();
+$tiempo_inicio = $_SESSION['tiempo_inicio'] ?? 0;
+$tiempo_limite = 60; // 60 segundos, es decir, 1 minuto
+
+if (!isset($_SESSION['autenticado']) || !$_SESSION['autenticado'] || ($tiempo_actual - $tiempo_inicio) > $tiempo_limite) {
+    session_destroy();
     header('Location: login.php');
     exit;
 }
