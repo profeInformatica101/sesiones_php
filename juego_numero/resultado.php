@@ -20,5 +20,5 @@ session_destroy();
 <body>
     <h1><?= $mensaje ?></h1>
     <p>Tu puntaje actual: <?= $_COOKIE['puntaje'] ?></p>
-    <a href="inicio.php">Jugar de nuevo</a>
+    <a href="index.php">Jugar de nuevo</a>
 </body>
